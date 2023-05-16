@@ -16,7 +16,6 @@ namespace FastGrid.FastGrid
 {
     public partial class TestFastGridView : Page
     {
-        private const short ROW_COUNT = 10;
         private ObservableCollection<DummyDate> _pullouts;
         public TestFastGridView()
         {
@@ -25,12 +24,12 @@ namespace FastGrid.FastGrid
 
         private async Task TestSimulateScroll()
         {
-            for (int i = 0; i < ROW_COUNT; ++i)
+            for (int i = 0; i < 200; ++i)
             {
                 ctrl.VerticalScrollToRowIndex(i + 1);
                 await Task.Delay(50);
             }
-            for (int i = ROW_COUNT; i >= 0; --i)
+            for (int i = 200; i >= 0; --i)
             {
                 ctrl.VerticalScrollToRowIndex(i + 1);
                 await Task.Delay(50);
@@ -250,11 +249,11 @@ namespace FastGrid.FastGrid
                 col.DisplayIndex = (idx++ + 3) % ctrl.Columns.Count;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) {
+        private async void Page_Loaded(object sender, RoutedEventArgs e) {
 
             ctrl.Columns["Time"].FilterCompareEquivalent.DateTimeFormat = "HH:mm";
-            SimpleTest();
-            //SimpleTestFilter();
+            //SimpleTest();
+            SimpleTestFilter();
             //SimpleTestFilterFewItmes();
             //await TestChangeColumnOrder();
             //await TestOffscreen();
